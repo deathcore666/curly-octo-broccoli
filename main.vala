@@ -12,7 +12,7 @@ public class Main : Gtk.Application {
     Operation? operation = null;
     Gtk.Label display_label = null;
 
-  https://github.com/tsoding/calculator.git  enum Operation {
+    enum Operation {
         ADD,
         SUB,
         MUL,
@@ -27,6 +27,34 @@ public class Main : Gtk.Application {
             number /= 10;
         }
         return count;
+    }
+
+    int fmax(int x1, int x2) {
+        var res = x1;
+        if (x2 > x1) 
+            res = x2;
+        return res;
+    }
+
+    int fmin(int x1, int x2) {
+        var res = x1;
+        if (x2 < x1) 
+            res = x2;
+        return res;
+    }
+
+    private bool timeout(void (* cb)(int), int arg1){
+        cb(arg1);
+        delayed_changed_id = 0;
+        return false;
+    }
+    
+    private void reset_timeout(void (* cb)(int), arg1){
+        if(delayed_changed_id > 0) 
+            Source.remove(delayed_changed_id);
+        delayed_changed_id = Timeout.add(search_delay, () => {
+            timeout(cb(arg1));
+        });
     }
 
     string big_markup(string text) {
@@ -150,12 +178,16 @@ public class Main : Gtk.Application {
         grid.attach(make_op_button("+", ADD), 3, 4);
 
         win.set_title("Calculator");
+        win.set_title()
+        win.set_title("Calculator");
+
         win.child = grid;
         win.present();
     }
 
     public static int main(string[] args) {
         var app = new Main();
+         reset_timeout(printf("asdasd")); // ?? ffs
         return app.run(args);
     }
 }
