@@ -6,3 +6,6 @@
 $ valac --pkg gtk4 main.vala
 $ ./main
 ```
+## Licence
+
+Licence-free
