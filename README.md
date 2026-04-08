@@ -8,4 +8,4 @@ $ ./main
 ```
 ## Licence
 
-See ./LICENCE
+See ./LICENSE
